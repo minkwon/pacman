@@ -6,8 +6,8 @@ def draw_horizontal(x):
         line += "- "
     print(line)
 
-
-draw_horizontal(1)
+# test
+draw_horizontal(6)
 draw_horizontal(2)
 draw_horizontal(3)
 
