@@ -21,7 +21,7 @@ stdscr.keypad(True)
 
     'left', 'right', 'up', 'down', or 'bad'
 """
-def get_input(b):
+def get_input():
     stdscr.nodelay(False)
     c = stdscr.getch()
     stdscr.clear()
