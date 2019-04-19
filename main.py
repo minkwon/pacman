@@ -1,10 +1,11 @@
-
+draw_box = False
 
 def draw_horizontal(x):
     line = " "
     for i in range(0, x):
         line += "- "
-    print(line)
+    if draw_box == True:
+        print(line)
     return line
 
 
@@ -13,7 +14,8 @@ def draw_vertical(x):
     line = "|"
     for i in range(0, x):
         line += " |"
-    print(line)
+    if draw_box == True:
+        print(line)
     return line
 
 size = input("please give me the number:")
@@ -38,14 +40,14 @@ def data(size):
 
 
 
-list = data(size)
+matrix = data(size)
 
 
-print(list)
-list.pop([0][0])
-list.insert([0][0], 'a')
-print(list)
-print("data:" + list[0][0])
+print(matrix)
+matrix[0].pop(0)
+matrix[0].insert(0, 'a')
+print(matrix)
+print("data:" + matrix[0][0])
 
 def map(size):
     map_list = []
