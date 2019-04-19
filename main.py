@@ -19,7 +19,6 @@ def draw_vertical(x):
 size = input("please give me the number:")
 size = int(size)
 
-
 for i in range(0,size):
     draw_horizontal(size)
     draw_vertical(size)
@@ -37,21 +36,30 @@ def data(size):
 
     return data
 
-print("data:" + data(size)[0][0])
+
+
+list = data(size)
+
+
+print(list)
+list.pop([0][0])
+list.insert([0][0], 'a')
+print(list)
+print("data:" + list[0][0])
 
 def map(size):
-    for i in range(0, size):
-        map_list = []
-        for j in range(0, size):
-            map_box = []
-            if i % 2 == 0 or i == 0:
-                map_box.append(draw_horizontal(size))
-            if i % 2 == 1:
-                map_box.append(draw_vertical(size))
+    map_list = []
+    for i in range(0, size * 2):
+        if i % 2 == 0 or i == 0:
+            map_box = [draw_horizontal(size)]
+        if i % 2 == 1:
+            map_box = [draw_vertical(size)]
         map_list.append(map_box)
+    map_list.append([draw_horizontal(size)])
 
     return map_list
 
+print(map(size))
 
 
 

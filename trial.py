@@ -71,5 +71,5 @@ while True:
             screen.print_on_screen(draw_vertical(size), i)
     screen.print_on_screen(draw_horizontal(size), size * 2)
 
-    screen.print_on_screen('|O', 1)
+    screen.print_on_screen('O', 1)
 
