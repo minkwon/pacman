@@ -17,8 +17,10 @@ while True:
 
     emoji = emoji_list[random.randrange(3)]
 
-    screen.print_on_screen("=========", 0)
+    screen.print_on_screen(" - - - -", 0)
+    screen.print_on_screen("| | | | |", 1)
+
     screen.print_on_screen("You entered " + key + " " + emoji, 2)
-    screen.print_on_screen("=========", 4)
+    screen.print_on_screen(" - - - -", 4)
 
 
