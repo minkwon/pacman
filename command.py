@@ -7,5 +7,5 @@ else:
     try:
         map_size = int(sys.argv[1])
     except ValueError:
-        map_size = 10
+        map_size = 3
 
