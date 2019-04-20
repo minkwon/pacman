@@ -120,22 +120,22 @@ while True:
             matrix[row].insert(col, 'O')
             change = "".join(matrix[row])
         if new_position[0] >= size * 2 - 1:
-            matrix[row].pop(size * 2 - 1)
-            matrix[row].insert(size * 2 - 1, 'O')
+            matrix[size * 2 - 1].pop(col)
+            matrix[size * 2 - 1].insert(col, 'O')
             change = "".join(matrix[row])
 
     if key == 'up':
         if new_position[0] > 1:
             matrix[row].pop(col)
             matrix[row].insert(col, ' ')
-            col -= 2
+            row -= 2
             new_position = [row, col]
             matrix[row].pop(col)
             matrix[row].insert(col, 'O')
             change = "".join(matrix[row])
-        if new_position[0] <= 1:
-            matrix[row].pop(1)
-            matrix[row].insert(1, 'O')
+        if new_position[0] < 1:
+            matrix[size * 2 - 1].pop(col)
+            matrix[size * 2 - 1].insert(col, 'O')
             change = "".join(matrix[row])
 
     for r_number, r in enumerate(matrix):
