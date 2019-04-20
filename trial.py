@@ -58,72 +58,86 @@ def map(size):
     map_list = []
     for i in range(0, size * 2):
         if i % 2 == 0 or i == 0:
-            map_box = [draw_horizontal(size)]
+            map_box = list(draw_horizontal(size))
         if i % 2 == 1:
-            map_box = [draw_vertical(size)]
+            map_box = list(draw_vertical(size))
         map_list.append(map_box)
-    map_list.append([draw_horizontal(size)])
+    map_list.append(list(draw_horizontal(size)))
 
     return map_list
 
 
 
+
+matrix = map(size)
+x = 0
+y = 0
+row = 2 * x + 1
+col = 2 * y + 1
+matrix[row].pop(col)
+matrix[row].insert(col, 'O')
+change = "".join(matrix[row])
+new_position = [row, col]
 while True:
     key = screen.get_input()
     screen.print_on_screen("                                       You entered " + key, 0)
 
-    for i in range(0, size * 2):
-        if i % 2 == 0 or i == 0:
-            screen.print_on_screen(draw_horizontal(size), i)
-        if i % 2 == 1:
-            screen.print_on_screen(draw_vertical(size), i)
-    screen.print_on_screen(draw_horizontal(size), size * 2)
+    if key == 'right':
+        if new_position[1] < size * 2 - 1:
+            matrix[row].pop(col)
+            matrix[row].insert(col, ' ')
+            col += 2
+            new_position = [row, col]
+            matrix[row].pop(col)
+            matrix[row].insert(col, 'O')
+            change = "".join(matrix[row])
+        if new_position[1] >= size * 2 - 1:
+            matrix[row].pop(size * 2 - 1)
+            matrix[row].insert(size * 2 - 1, 'O')
+            change = "".join(matrix[row])
 
-    screen.print_on_screen('|O', 1)
+    if key == 'left':
+        if new_position[1] > 1:
+            matrix[row].pop(col)
+            matrix[row].insert(col, ' ')
+            col -= 2
+            new_position = [row, col]
+            matrix[row].pop(col)
+            matrix[row].insert(col, 'O')
+            change = "".join(matrix[row])
+        if new_position[1] <= 1:
+            matrix[row].pop(1)
+            matrix[row].insert(1, 'O')
+            change = "".join(matrix[row])
 
+    if key == 'down':
+        if new_position[0] < size * 2 - 1:
+            matrix[row].pop(col)
+            matrix[row].insert(col, ' ')
+            row += 2
+            new_position = [row, col]
+            matrix[row].pop(col)
+            matrix[row].insert(col, 'O')
+            change = "".join(matrix[row])
+        if new_position[0] >= size * 2 - 1:
+            matrix[row].pop(size * 2 - 1)
+            matrix[row].insert(size * 2 - 1, 'O')
+            change = "".join(matrix[row])
 
+    if key == 'up':
+        if new_position[0] > 1:
+            matrix[row].pop(col)
+            matrix[row].insert(col, ' ')
+            col -= 2
+            new_position = [row, col]
+            matrix[row].pop(col)
+            matrix[row].insert(col, 'O')
+            change = "".join(matrix[row])
+        if new_position[0] <= 1:
+            matrix[row].pop(1)
+            matrix[row].insert(1, 'O')
+            change = "".join(matrix[row])
 
-    right_count = 0
-    left_count = size - 1
-    down_count = 0
-    up_count = size - 1
-    if screen.get_input() == 'right' and 0 < right_count <= size - 1:
-        data[down_count].pop(right_count)
-        right_count += 1
-        left_count -= 1
-        data[down_count].insert(right_count, 'O')
-
-        if right_count > size - 1:
-            right_count = size - 1
-
-    if screen.get_input() == 'left' and 0 < left_count <= size - 1:
-        data[down_count].pop(right_count)
-        left_count += 1
-        right_count -= 1
-        data[down_count].insert(right_count, 'O')
-
-        if left_count > size - 1:
-            left_count = size - 1
-
-    if screen.get_input() == 'down' and 0 < down_count <= size - 1:
-        data[down_count].pop(right_count)
-        down_count += 1
-        up_count -= 1
-        data[down_count].insert(right_count, 'O')
-
-        if down_count > size - 1:
-            down_count = size - 1
-
-    if screen.get_input() == 'up' and 0 < up_count <= size - 1:
-        data[down_count].pop(right_count)
-        up_count += 1
-        down_count -= 1
-        data[down_count].insert(right_count, 'O')
-
-        if up_count > size - 1:
-            up_count = size - 1
-
-
-
-
+    for r_number, r in enumerate(matrix):
+        screen.print_on_screen("".join(r), r_number)
 

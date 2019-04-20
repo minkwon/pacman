@@ -23,7 +23,7 @@ stdscr.keypad(True)
 """
 def get_input():
     stdscr.nodelay(False)
-    c = stdscr.getch()
+    c = stdscr.getch() # the program pause here
     stdscr.clear()
     if c == 260:
         return 'left'
@@ -40,8 +40,8 @@ def get_input():
 """
     Prints the string at row
 """
-def print_on_screen(string, row):
-    stdscr.addstr(row, 0, string)
+def print_on_screen(string, row_number):
+    stdscr.addstr(row_number, 0, string)
 
 
 def singal_cleanup(signal, frame):
