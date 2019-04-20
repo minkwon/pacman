@@ -91,10 +91,8 @@ while True:
             matrix[row].pop(col)
             matrix[row].insert(col, 'O')
             change = "".join(matrix[row])
-        if new_position[1] >= size * 2 - 1:
-            matrix[row].pop(size * 2 - 1)
-            matrix[row].insert(size * 2 - 1, 'O')
-            change = "".join(matrix[row])
+        
+
 
     if key == 'left':
         if new_position[1] > 1:
@@ -104,10 +102,6 @@ while True:
             new_position = [row, col]
             matrix[row].pop(col)
             matrix[row].insert(col, 'O')
-            change = "".join(matrix[row])
-        if new_position[1] <= 1:
-            matrix[row].pop(1)
-            matrix[row].insert(1, 'O')
             change = "".join(matrix[row])
 
     if key == 'down':
@@ -119,10 +113,6 @@ while True:
             matrix[row].pop(col)
             matrix[row].insert(col, 'O')
             change = "".join(matrix[row])
-        if new_position[0] >= size * 2 - 1:
-            matrix[size * 2 - 1].pop(col)
-            matrix[size * 2 - 1].insert(col, 'O')
-            change = "".join(matrix[row])
 
     if key == 'up':
         if new_position[0] > 1:
@@ -132,10 +122,6 @@ while True:
             new_position = [row, col]
             matrix[row].pop(col)
             matrix[row].insert(col, 'O')
-            change = "".join(matrix[row])
-        if new_position[0] <= 1:
-            matrix[1].pop(col)
-            matrix[1].insert(col, 'O')
             change = "".join(matrix[row])
 
     for r_number, r in enumerate(matrix):
