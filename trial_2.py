@@ -7,12 +7,12 @@ import sound
 #
 # https://unicode.org/emoji/charts/emoji-list.html
 
-emoji_list = [
-    "\U0001F606",  # laugh
-    "\U0001F925",  # pinocchio
-    "\U0001F495",  # two hearts
-    "\U0001F47B"  # ghost
-]
+emoji_list = {
+    "laugh" : "\U0001F606",  # laugh
+    "pinocchio" : "\U0001F925",  # pinocchio
+    "two hearts" : "\U0001F495",  # two hearts
+    "ghost" : "\U0001F47B"  # ghost
+}
 
 empty_space = '  '
 
@@ -75,7 +75,9 @@ def data(size):
         my_list = []
         for j in range(0, size):
             if get_percentage() < 0.1:
-                my_list.append(emoji_list[2])
+                my_list.append(emoji_list['laugh'])
+            elif 0.1 <= get_percentage() and get_percentage() < 0.2:
+                my_list.append(emoji_list['two hearts'])
             else:
                 my_list.append(empty_space)
 
@@ -105,6 +107,8 @@ def character_on_map():
 def check_side(x, y):
     if square[x][y] == empty_space:
         return '1'
+    elif square[x][y] == emoji_list['laugh']:
+        return '2'
     else:
         return '0'
 
@@ -141,7 +145,7 @@ def make_new_position(direction, row, col):
 
 
 
-character = emoji_list[3]
+character = emoji_list['ghost']
 square = character_on_map()
 x = 0
 y = 0
@@ -156,21 +160,28 @@ while True:
     screen.print_on_screen("                                       Position " + str(new_position), 0)
 
     if key == 'right':
-        if new_position[1] < size * 2 - 1 and right_side_checking() == '1':
-            new_position = make_new_position(key, new_position[0], new_position[1])
+        if new_position[1] < size * 2 - 1:
+            if right_side_checking() == '1' or right_side_checking() == '2':
+                new_position = make_new_position(key, new_position[0], new_position[1])
 
 
     elif key == 'left':
-        if new_position[1] > 1 and left_side_checking() == '1':
-            new_position = make_new_position(key, new_position[0], new_position[1])
+        if new_position[1] > 1:
+            if left_side_checking() == '1' or left_side_checking() == '2':
+                new_position = make_new_position(key, new_position[0], new_position[1])
+
 
     elif key == 'down':
-        if new_position[0] < size * 2 - 1 and down_side_checking() == '1':
-            new_position = make_new_position(key, new_position[0], new_position[1])
+        if new_position[0] < size * 2 - 1:
+            if down_side_checking() == '1' or down_side_checking() == '2':
+                new_position = make_new_position(key, new_position[0], new_position[1])
+
 
     elif key == 'up':
-        if new_position[0] > 1 and up_side_checking() == '1':
-            new_position = make_new_position(key, new_position[0], new_position[1])
+        if new_position[0] > 1:
+            if up_side_checking() == '1' or up_side_checking() == '2':
+                new_position = make_new_position(key, new_position[0], new_position[1])
+
 
     for r_number, r in enumerate(square):
         screen.print_on_screen("".join(r), r_number)
