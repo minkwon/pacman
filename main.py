@@ -14,6 +14,9 @@ emoji_list = [
     "\U0001F47B"  # ghost
 ]
 
+empty_space = '  '
+
+
 if len(sys.argv) < 2:
     size = 3
 else:
@@ -22,13 +25,19 @@ else:
     except ValueError:
         size = 3
 
+"""
+    This method returns float between 0 and 1 excluding 1.
+"""
+def get_percentage():
+    return random.uniform(0, 1)
+
 
 draw_box = False
 def draw_vertical(x):
     vertical_list = []
     vertical_list.append('|')
     for i in range(0, x):
-        vertical_list.append('  ')
+        vertical_list.append(empty_space)
         vertical_list.append('|')
     if draw_box == True:
         print(vertical_list)
@@ -65,7 +74,11 @@ def data(size):
     for i in range(0, size):
         my_list = []
         for j in range(0, size):
-            my_list.append('  ')
+            if get_percentage() < 0.1:
+                my_list.append(emoji_list[2])
+            else:
+                my_list.append(empty_space)
+
         data.append(my_list)
 
     return data
@@ -76,39 +89,42 @@ map_line = map_list(size)
 matrix = data(size)
 
 
+
+
+
 def character_on_map():
     for i in range(0, len(matrix[0])):
             for j in range(0, len(matrix[0])):
                 map_line[2* j + 1].pop(2 * i + 1)
                 value = matrix[j].pop(i)
-                matrix[j].insert(i, ' ')
+                matrix[j].insert(i, empty_space)
                 map_line[2 * j + 1].insert(2 * i + 1, value)
     return map_line
 
 
 def right_side_checking():
-    if square[row][col + 2] == '  ':
+    if square[row][col + 2] == empty_space:
         return '1'
     else:
         return '0'
 
 
 def left_side_checking():
-    if square[row][col - 2] == '  ':
+    if square[row][col - 2] == empty_space:
         return '1'
     else:
         return '0'
 
 
 def down_side_checking():
-    if square[row + 2][col] == '  ':
+    if square[row + 2][col] == empty_space:
         return '1'
     else:
          return '0'
 
 
 def up_side_checking():
-    if square[row - 2][col] == '  ':
+    if square[row - 2][col] == empty_space:
         return '1'
     else:
         return '0'
@@ -130,10 +146,11 @@ while True:
     key = screen.get_input()
     screen.print_on_screen("                                       You entered " + key, 0)
 
+
     if key == 'right':
         if new_position[1] < size * 2 - 1 and right_side_checking() == '1':
             square[row].pop(col)
-            square[row].insert(col, '  ')
+            square[row].insert(col, empty_space)
             col += 2
             new_position = [row, col]
             square[row].pop(col)
@@ -149,7 +166,7 @@ while True:
     if key == 'left':
         if new_position[1] > 1 and left_side_checking() == '1':
             square[row].pop(col)
-            square[row].insert(col, '  ')
+            square[row].insert(col, empty_space)
             col -= 2
             new_position = [row, col]
             square[row].pop(col)
@@ -159,7 +176,7 @@ while True:
     if key == 'down':
         if new_position[0] < size * 2 - 1 and down_side_checking() == '1':
             square[row].pop(col)
-            square[row].insert(col, '  ')
+            square[row].insert(col, empty_space)
             row += 2
             new_position = [row, col]
             square[row].pop(col)
@@ -169,7 +186,7 @@ while True:
     if key == 'up':
         if new_position[0] > 1 and up_side_checking() == '1':
             square[row].pop(col)
-            square[row].insert(col, '  ')
+            square[row].insert(col, empty_space)
             row -= 2
             new_position = [row, col]
             square[row].pop(col)
@@ -178,4 +195,6 @@ while True:
 
     for r_number, r in enumerate(square):
         screen.print_on_screen("".join(r), r_number)
+
+
 
