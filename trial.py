@@ -1,8 +1,7 @@
 import screen
 import random
 import sys
-
-
+import sound
 
 
 # Emoji from
@@ -12,7 +11,8 @@ import sys
 emoji_list = [
     "\U0001F606", # laugh
     "\U0001F925", # pinocchio
-    "\U0001F495" # two hearts
+    "\U0001F495", # two hearts
+    "\U0001F47B" # ghost
 ]
 
 if len(sys.argv) < 2:
@@ -68,14 +68,14 @@ def map(size):
 
 
 
-
+character = '0'
 matrix = map(size)
 x = 0
 y = 0
 row = 2 * x + 1
 col = 2 * y + 1
 matrix[row].pop(col)
-matrix[row].insert(col, 'O')
+matrix[row].insert(col, character)
 change = "".join(matrix[row])
 new_position = [row, col]
 while True:
@@ -89,9 +89,13 @@ while True:
             col += 2
             new_position = [row, col]
             matrix[row].pop(col)
-            matrix[row].insert(col, 'O')
+            matrix[row].insert(col, character)
             change = "".join(matrix[row])
-        
+        else:
+            pass
+
+
+
 
 
     if key == 'left':
@@ -101,7 +105,7 @@ while True:
             col -= 2
             new_position = [row, col]
             matrix[row].pop(col)
-            matrix[row].insert(col, 'O')
+            matrix[row].insert(col, character)
             change = "".join(matrix[row])
 
     if key == 'down':
@@ -111,7 +115,7 @@ while True:
             row += 2
             new_position = [row, col]
             matrix[row].pop(col)
-            matrix[row].insert(col, 'O')
+            matrix[row].insert(col, character)
             change = "".join(matrix[row])
 
     if key == 'up':
@@ -121,7 +125,7 @@ while True:
             row -= 2
             new_position = [row, col]
             matrix[row].pop(col)
-            matrix[row].insert(col, 'O')
+            matrix[row].insert(col, character)
             change = "".join(matrix[row])
 
     for r_number, r in enumerate(matrix):
