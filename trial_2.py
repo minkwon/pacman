@@ -23,21 +23,6 @@ else:
         size = 3
 
 
-def data(size):
-    data = []
-    for i in range(0, size):
-        my_list = []
-        for j in range(0, size):
-            my_list.append('  ')
-        data.append(my_list)
-
-    return data
-
-matrix = data(size)
-matrix[0].pop(0)
-matrix[0].insert(0, 'a')
-print(matrix)
-
 draw_box = False
 def draw_vertical(x):
     vertical_list = []
@@ -49,7 +34,6 @@ def draw_vertical(x):
         print(vertical_list)
     return vertical_list
 
-print(draw_vertical(size))
 
 def draw_horizontal(x):
     horizontal_list = []
@@ -61,7 +45,6 @@ def draw_horizontal(x):
         print(horizontal_list)
     return horizontal_list
 
-print(draw_horizontal(size))
 
 
 def map_list(size):
@@ -77,7 +60,20 @@ def map_list(size):
     return map_list
 
 
+def data(size):
+    data = []
+    for i in range(0, size):
+        my_list = []
+        for j in range(0, size):
+            my_list.append('  ')
+        data.append(my_list)
+
+    return data
+
+
+
 map_line = map_list(size)
+matrix = data(size)
 
 
 def character_on_map():
@@ -90,18 +86,36 @@ def character_on_map():
     return map_line
 
 
+def right_side_checking():
+    if square[row][col + 2] == '  ':
+        return '1'
+    else:
+        return '0'
 
 
-# data = data(size)
-# character = emoji_list[3]
-# x = 0
-# y = 0
-# row = 2 * x + 1
-# col = 2 * y + 1
-# data[row].pop(col)
-# data[row].insert(col, character)
-# change = "".join(data[row])
-# new_position = [row, col]
+def left_side_checking():
+    if square[row][col - 2] == '  ':
+        return '1'
+    else:
+        return '0'
+
+
+def down_side_checking():
+    if square[row + 2][col] == '  ':
+        return '1'
+    else:
+         return '0'
+
+
+def up_side_checking():
+    if square[row - 2][col] == '  ':
+        return '1'
+    else:
+        return '0'
+
+
+
+
 character = emoji_list[3]
 square = character_on_map()
 x = 0
@@ -117,9 +131,9 @@ while True:
     screen.print_on_screen("                                       You entered " + key, 0)
 
     if key == 'right':
-        if new_position[1] < size * 2 - 1:
+        if new_position[1] < size * 2 - 1 and right_side_checking() == '1':
             square[row].pop(col)
-            square[row].insert(col, '  ')
+            square[row].insert(col, emoji_list[2])
             col += 2
             new_position = [row, col]
             square[row].pop(col)
@@ -133,7 +147,7 @@ while True:
 
 
     if key == 'left':
-        if new_position[1] > 1:
+        if new_position[1] > 1 and left_side_checking() == '1':
             square[row].pop(col)
             square[row].insert(col, '  ')
             col -= 2
@@ -143,7 +157,7 @@ while True:
             change = "".join(square[row])
 
     if key == 'down':
-        if new_position[0] < size * 2 - 1:
+        if new_position[0] < size * 2 - 1 and down_side_checking() == '1':
             square[row].pop(col)
             square[row].insert(col, '  ')
             row += 2
@@ -153,7 +167,7 @@ while True:
             change = "".join(square[row])
 
     if key == 'up':
-        if new_position[0] > 1:
+        if new_position[0] > 1 and up_side_checking() == '1':
             square[row].pop(col)
             square[row].insert(col, '  ')
             row -= 2
