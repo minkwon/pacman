@@ -133,7 +133,7 @@ while True:
     if key == 'right':
         if new_position[1] < size * 2 - 1 and right_side_checking() == '1':
             square[row].pop(col)
-            square[row].insert(col, emoji_list[2])
+            square[row].insert(col, '  ')
             col += 2
             new_position = [row, col]
             square[row].pop(col)
