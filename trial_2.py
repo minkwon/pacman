@@ -46,6 +46,9 @@ else:
 def get_percentage():
     return random.uniform(0, 1)
 
+def enemy_location():
+    return random.randrange(1, size)
+
 
 draw_box = False
 
@@ -181,7 +184,6 @@ def make_new_position(direction, row, col):
 
 
 
-
 character = emoji_list['ghost']
 square = character_on_map()
 x = 0
@@ -194,8 +196,8 @@ new_position = [row, col]
 point = 0
 
 enemy = emoji_list['bat']
-a = 2
-b = 0
+a = enemy_location()
+b = enemy_location()
 r = 2 * a + 1
 c = 2 * b + 1
 square[r].pop(c)
